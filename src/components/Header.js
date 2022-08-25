@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {Link} from "react-router-dom"
 import "./Header.css"
 
@@ -15,17 +15,17 @@ const Header = () => {
     <div className='header-links'>
         <ul>
             <li>
-                <Link to="/">Home</Link>
+                <Link to="/" className='home-link'>Home</Link>
             </li>
         </ul>
         <ul>
             <li>
-                <Link to="/cart">Cart</Link>
+                <Link to="/cart" className='cart-link'>Cart</Link>
             </li>
         </ul>
         <ul>
             <li>
-            <Link to="/payments">Payments</Link>
+            <Link to="/payments"  className='payments-link'>Payments</Link>
             </li>
         </ul>
     </div>

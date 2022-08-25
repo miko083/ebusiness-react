@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import './App.css';
 import Header from './components/Header';
-import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 import Products from './components/Products';
 import Cart from './components/Cart'
 import Payments from './components/Payments'
 
+import useLocalStorage from'./hooks/UseLocalStorage'
+
 const App = () => {
 
   const [productsState, setProductsState] = useState([])
-  const [cartItems, setCartItems] = useState([])
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [cartItems, setCartItems] = useLocalStorage('cart_items', [])
+  const [totalPrice, setTotalPrice] = useLocalStorage('total_price', 0)
 
-  const calculatePrice = () => {
-    var tempPrice = totalPrice
-    cartItems.map((cartItem) => tempPrice += cartItem.product.price)
-    return totalPrice
-  }
-  
   const handleAddProduct = (product) => {
     
     const productExist = cartItems.find((item) => item.product.ID === product.ID)
@@ -34,6 +30,7 @@ const App = () => {
       setCartItems([...cartItems, {product, quantity: 1}])
     }
     setTotalPrice(totalPrice + product.price)
+    localStorage.setItem('cartItems', JSON.stringify(cartItems))
     }
 
   const handleRemoveProduct = (product) => {
@@ -46,11 +43,13 @@ const App = () => {
       )
     }
     setTotalPrice(totalPrice - product.price)
+    // localStorage.setItem('cartItems', cartItems)
   }
 
   const handleCartClearance = () => {
     setCartItems([])
     setTotalPrice(0)
+    // localStorage.setItem('cartItems', cartItems)
   }
 
   // Data from backend

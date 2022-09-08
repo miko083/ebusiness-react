@@ -82,6 +82,25 @@ const App = () => {
   
   }
 
+  const getCart = () => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }
+    var cartItemsFromBackend = []
+    var tempTotalPrice = 0
+    setTotalPrice(0)
+  
+    fetch(`http://localhost:8000/cartsUser`, requestOptions).then(response => response.json()).then(response => {
+      response["consoles_with_quantity"].map(consoleWithQuantity=> {
+        cartItemsFromBackend.push({"product": consoleWithQuantity.console, "quantity": consoleWithQuantity.quantity }) ;
+        tempTotalPrice += (consoleWithQuantity.console.price * consoleWithQuantity.quantity);
+        return ""}); 
+      
+      setTotalPrice(tempTotalPrice)
+      setCartItems(cartItemsFromBackend)
+    })
+  }
   const makePay = () => {
 
     const dataToSend = {
@@ -96,7 +115,7 @@ const App = () => {
     }
 
     fetch(`http://localhost:8000/payments`, requestOptions).then((response) => {
-      if(!response.ok) throw new Error(response.status);
+      if(!response.ok) alert("No shipping cart saved.");
         else alert("Payment done.")
     })
     setCartItems([])
@@ -110,7 +129,7 @@ const App = () => {
         <Header/>
         <Routes>
             <Route path="/" element={<Products productsItems={productsState} handleAddProduct={handleAddProduct}/>}></Route>
-            <Route path="/cart" element={<Cart cartItems={cartItems} handleAddProduct={handleAddProduct} handleRemoveProduct={handleRemoveProduct} handleCartClearance={handleCartClearance} submitCart={submitCart}/>}></Route>
+            <Route path="/cart" element={<Cart getCart={getCart} cartItems={cartItems} handleAddProduct={handleAddProduct} handleRemoveProduct={handleRemoveProduct} handleCartClearance={handleCartClearance} submitCart={submitCart}/>}></Route>
             <Route path="/payments" element={<Payments cartItems={cartItems} totalPrice={totalPrice} makePay={makePay}/>}></Route>
         </Routes>
       </Router>

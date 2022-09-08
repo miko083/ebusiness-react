@@ -24,7 +24,7 @@
     background-color: red;
 }
 
-.clear-cart-button, .save-payments-button{
+.clear-cart-button, .save-payments-button, .get-saved-button{
     border: none;
     border-radius: 10px;
     height: 30px;
@@ -45,4 +45,11 @@
     width: 200px;
     font-size: 16px;
     color: rgb(28, 25, 25);
+}
+
+.get-saved-button {
+    background-color:rgb(62, 103, 205);
+    width: 200px;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
 }

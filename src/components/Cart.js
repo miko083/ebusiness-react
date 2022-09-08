@@ -8,8 +8,10 @@ const Cart = (props) => {
     return (
       <div className="cart-items">
         
-        {cartItems.length === 0 && (
+        {cartItems.length === 0 && (<div>
             <div className="cart-items-empty"> No items added</div>
+            <button className="get-saved-button" onClick={() => props.getCart()}>Get saved data</button>
+            </div>
         )}
 
         {cartItems.map((cartItem) => (

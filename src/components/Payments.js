@@ -18,7 +18,7 @@ const Payments = (props) => {
               ))}
   
           {cartItems.length >= 1 && (<div>
-            <h2> Total price: {totalPrice} zl</h2> 
+            <h2 className="price"> Total price: {totalPrice} zl</h2> 
             <button className="save-payments-button" onClick={() => props.makePay()}>Pay</button>
             </div>
           )}

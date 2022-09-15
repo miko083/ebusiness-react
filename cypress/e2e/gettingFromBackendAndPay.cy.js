@@ -11,11 +11,6 @@ describe('empty spec', () => {
 
       cy.get('.clear-cart-button').first().click()
       cy.get('.get-saved-button').first().click()
-
-      cy.get('.quantity').first().should(
-        "have.text",
-        "Quantity: 1"
-      )
       
       cy.get('.save-payments-button').first().click()
       cy.url().should('include', '/payments')

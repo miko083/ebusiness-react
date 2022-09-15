@@ -12,10 +12,7 @@ describe('empty spec', () => {
       cy.get('.clear-cart-button').first().click()
       cy.get('.get-saved-button').first().click()
 
-      cy.get('.quantity').first().should(
-        "have.text",
-        "Quantity: 1"
-      )
+      cy.get('.quantity').first().should('be.visible')
 
       // cy.get('.quantity').first().contains('Quantity: 1')
 
